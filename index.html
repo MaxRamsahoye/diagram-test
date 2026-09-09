@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Mechanics of Meta-Utopia &mdash; Diagram</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpolygon points='12,2 21,7 21,17 12,22 3,17 3,7' fill='%23ffffff' stroke='%23e36843' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-color: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --border-color: #e5e5e5;
+    --accent-color: #e36843;
+    --font-serif: 'Cormorant Garamond', serif;
+    --font-sans: 'IBM Plex Sans Arabic', sans-serif;
+
+    /* Wireframe Diagram Variables */
+    --wf-center-hover: conic-gradient(#fdf8e2 0deg 90deg, #f5f6f7 90deg 180deg, #ffeae7 180deg 270deg, #fee4d0 270deg 360deg);
+    --wf-tl-hover: #fee4d0;
+    --wf-tr-hover: #fdf8e2;
+    --wf-bl-hover: #ffeae7;
+    --wf-br-hover: #f5f6f7;
+  }
+
+  html.dark-theme {
+    --bg-color: #121212;
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --border-color: #333333;
+    --accent-color: #d15632;
+
+    --wf-center-hover: conic-gradient(#3a2e22 0deg 90deg, #2a2b2c 90deg 180deg, #382422 180deg 270deg, #3d2b1f 270deg 360deg);
+    --wf-tl-hover: #3d2b1f;
+    --wf-tr-hover: #3a2e22;
+    --wf-bl-hover: #382422;
+    --wf-br-hover: #2a2b2c;
+  }
+
+  * { box-sizing: border-box; }
+
+  html {
+    background-color: var(--bg-color);
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    transition: background-color 0.4s ease;
+  }
+  ::-webkit-scrollbar { display: none; }
+
+  body {
+    margin: 0;
+    font-family: var(--font-serif);
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    color: var(--text-primary);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.4s ease, color 0.4s ease;
+    padding: 3rem 1.5rem 5rem;
+  }
+
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    font-family: var(--font-sans);
+  }
+  .page-title h1 {
+    font-family: var(--font-serif);
+    font-size: 2.1rem;
+    line-height: 1.15;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+  .page-title p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 640px;
+    transition: color 0.4s ease;
+  }
+  .dot-accent { color: var(--accent-color); }
+
+  .theme-toggle {
+    cursor: pointer;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+    transition: color 0.4s ease;
+  }
+  .theme-toggle:hover { color: var(--accent-color); }
+  .theme-toggle svg { width: 22px; height: 22px; }
+  .moon-icon { display: none; }
+  html.dark-theme .sun-icon { display: none; }
+  html.dark-theme .moon-icon { display: block; }
+
+  /* ========================================== */
+  /* WIREFRAME DIAGRAM                          */
+  /* ========================================== */
+  .mechanics-diagram-breakout {
+    width: 100%;
+    max-width: 900px;
+    margin: 3rem auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .combined-frames-box {
+    width: 100%;
+    max-width: 900px;
+    border-left: 4px solid var(--accent-color);
+    padding-left: 1.5rem;
+    margin-bottom: 3rem;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    transition: color 0.4s ease;
+  }
+  .combined-frames-box a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: text-decoration 0.2s ease;
+  }
+  .combined-frames-box a:hover { text-decoration: underline; }
+
+  .wireframe-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    font-family: var(--font-sans);
+  }
+
+  .axis-label {
+    position: absolute;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    letter-spacing: 0.03em;
+  }
+  .y-axis {
+    top: 50%;
+    left: -90px;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+  }
+  .x-axis {
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ticks {
+    position: absolute;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    transition: color 0.4s ease;
+  }
+  .y-high { top: 15%; left: -45px; }
+  .y-low { bottom: 15%; left: -45px; }
+  .x-low { bottom: -30px; left: 15%; }
+  .x-high { bottom: -30px; right: 15%; }
+
+  .wireframe-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.3 / 1;
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+
+  .wf-cell { position: absolute; }
+
+  .wf-content {
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+  }
+
+  .text-content {
+    position: absolute;
+    width: calc(100% - 4rem);
+  }
+
+  .wf-tl .text-content { top: 2rem; left: 2rem; text-align: left; }
+  .wf-tr .text-content { top: 2rem; right: 2rem; text-align: right; }
+  .wf-bl .text-content { bottom: 2rem; left: 2rem; text-align: left; }
+  .wf-br .text-content { bottom: 2rem; right: 2rem; text-align: right; }
+
+  .flow-br { float: right; width: 50%; height: 100%; shape-outside: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); shape-margin: 1.5rem; }
+  .flow-bl { float: left; width: 50%; height: 100%; shape-outside: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); shape-margin: 1.5rem; }
+  .flow-tr { float: right; width: 50%; height: 100%; shape-outside: polygon(0 0, 100% 0, 100% 40%, 0 40%); shape-margin: 1.5rem; }
+  .flow-tl { float: left; width: 50%; height: 100%; shape-outside: polygon(0 0, 100% 0, 100% 40%, 0 40%); shape-margin: 1.5rem; }
+
+  .wf-cell:hover .wf-content { transform: translateY(-4px); }
+
+  .wf-cell h4 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+  }
+  .wf-cell .sub-title {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    display: block;
+    transition: color 0.4s ease;
+  }
+  .wf-cell p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-primary);
+    transition: font-weight 0.2s ease;
+  }
+  .wf-cell:hover p { font-weight: 500; }
+
+  .wf-center {
+    left: 25%;
+    top: 30%;
+    width: 50%;
+    height: 40%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    z-index: 10;
+    transition: background-color 0.4s ease, border-color 0.4s ease;
+  }
+  .wf-center::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--wf-center-hover);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  .wf-center:hover::before { opacity: 1; }
+
+  .wf-center .wf-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2.5rem;
+  }
+  .wf-center .text-content { position: relative; width: 100%; }
+
+  .wf-tl, .wf-tr, .wf-bl, .wf-br {
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+  }
+
+  .wf-tl {
+    left: 0; top: 0;
+    width: calc(50% - 0.5px); height: calc(50% - 0.5px);
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 60%, 50% 100%, 0 100%);
+  }
+  .wf-tl:hover { background-color: var(--wf-tl-hover); }
+
+  .wf-tr {
+    right: 0; top: 0;
+    width: calc(50% - 0.5px); height: calc(50% - 0.5px);
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 50% 60%, 0 60%);
+  }
+  .wf-tr:hover { background-color: var(--wf-tr-hover); }
+
+  .wf-bl {
+    left: 0; bottom: 0;
+    width: calc(50% - 0.5px); height: calc(50% - 0.5px);
+    clip-path: polygon(0 0, 50% 0, 50% 40%, 100% 40%, 100% 100%, 0 100%);
+  }
+  .wf-bl:hover { background-color: var(--wf-bl-hover); }
+
+  .wf-br {
+    right: 0; bottom: 0;
+    width: calc(50% - 0.5px); height: calc(50% - 0.5px);
+    clip-path: polygon(50% 0, 100% 0, 100% 100%, 0 100%, 0 40%, 50% 40%);
+  }
+  .wf-br:hover { background-color: var(--wf-br-hover); }
+
+  @media (max-width: 1000px) {
+    .text-content { width: calc(100% - 2.5rem); }
+    .wf-tl .text-content { top: 1.25rem; left: 1.25rem; }
+    .wf-tr .text-content { top: 1.25rem; right: 1.25rem; }
+    .wf-bl .text-content { bottom: 1.25rem; left: 1.25rem; }
+    .wf-br .text-content { bottom: 1.25rem; right: 1.25rem; }
+
+    .wf-cell h4 { font-size: 1rem; margin-bottom: 0.15rem; }
+    .wf-cell .sub-title { font-size: 0.8rem; margin-bottom: 0.5rem; }
+    .wf-cell p { font-size: 0.8rem; line-height: 1.3; }
+    .wf-center .wf-content { padding: 1.25rem; }
+  }
+
+  @media (max-width: 768px) {
+    .mechanics-diagram-breakout { padding: 0 1rem; }
+    .wireframe-wrapper { max-width: 100%; margin: 0 1rem; }
+    .wireframe-container { aspect-ratio: 1.1 / 1; }
+
+    .text-content { width: calc(100% - 1.5rem); }
+    .wf-tl .text-content { top: 0.75rem; left: 0.75rem; }
+    .wf-tr .text-content { top: 0.75rem; right: 0.75rem; }
+    .wf-bl .text-content { bottom: 0.75rem; left: 0.75rem; }
+    .wf-br .text-content { bottom: 0.75rem; right: 0.75rem; }
+
+    .wf-cell h4 { font-size: 0.95rem; }
+    .wf-cell .sub-title { font-size: 0.75rem; margin-bottom: 0.2rem; }
+    .wf-cell p { display: none; }
+    .axis-label { font-size: 0.9rem; }
+    .ticks { font-size: 0.8rem; }
+    .wf-center .wf-content { padding: 1rem; }
+
+    .page-title h1 { font-size: 1.6rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="page-title">
+    <h1>The Mechanics of Meta-Utopia<span class="dot-accent">?</span></h1>
+    <p>A typology of four possible post-AGI cultural attractor states, mapped across two civilisation-design variables&mdash;cultural integrity and membrane permeability.</p>
+  </div>
+  <div class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </div>
+</div>
+
+<div class="mechanics-diagram-breakout">
+  <div class="combined-frames-box">
+    <em>Unified Frames</em><span class="dot-accent">:</span> 1. Duettmann's <a href="https://foresightinstitute.substack.com/p/defend-physical" target="_blank">'multi-polar active shields'</a> and Clarke's <a href="https://80000hours.org/problem-profiles/risks-of-stable-totalitarianism/" target="_blank">'stable totalitarianism'</a> (top left). 2. Nozick's <a href="https://iep.utm.edu/noz-poli/#:~:text=Instead%2C%20he%20turns,of%20cultural%20relativism." target="_blank">&lsquo;meta-utopia&rsquo;</a> (top right) and Barrat-Douglas' <a href="https://strangecities.substack.com/p/the-choice-transition" target="_blank">'choice transition&rsquo;</a> and <a href="https://www.lesswrong.com/posts/kvZyCJ4qMihiJpfCr/ai-for-societal-uplift-as-a-path-to-victory" target="_blank">'societal uplift'</a> 3. Hanson's <a href="https://quillette.com/2024/04/11/beware-cultural-drift/" target="_blank">'global monoculture'</a> and Drexler's <a href="https://en.wikipedia.org/wiki/Gray_goo" target="_blank">'gray goo'</a> (bottom right) 4. Bostrom's (technological) <a href="https://nickbostrom.com/papers/future.pdf" target="_blank">'permanent plateau'</a> and Ord's <a href="https://www.are.na/block/9253597" target="_blank">'unrecoverable collapse'</a> (bottom left)
+  </div>
+  <div class="wireframe-wrapper" id="matrix-wrapper">
+    <div class="axis-label y-axis">Cultural Integrity</div>
+    <div class="ticks y-high">High</div>
+    <div class="ticks y-low">Low</div>
+
+    <div class="wireframe-container">
+
+      <div class="wf-cell wf-tl">
+        <div class="wf-content">
+          <div class="flow-br"></div>
+          <div class="text-content">
+            <h4>Meta-Dystopian Enclosure</h4>
+            <span class="sub-title"><span class="dot-accent">(</span>Localised lock-ins<span class="dot-accent">)</span></span>
+            <p>The transition to a defense-dominant, maximally decentralised world-system where every sub-topia is a completely closed system with memetic transmission and physical migration rendered functionally impossible.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-cell wf-tr">
+        <div class="wf-content">
+          <div class="flow-bl"></div>
+          <div class="text-content">
+            <h4>Meta-Utopian Uplift</h4>
+            <span class="sub-title"><span class="dot-accent">(</span>Epistemic Equilibria<span class="dot-accent">)</span></span>
+            <p>The transition to a semi-compartmentalised world-system with boundaries open enough for multi-culturalism, freedom of movement and moral progress, but sufficiently protected to prevent hostile cultural takeover.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-cell wf-bl">
+        <div class="wf-content">
+          <div class="flow-tr"></div>
+          <div class="text-content">
+            <h4>Cultural Collapse</h4>
+            <span class="sub-title"><span class="dot-accent">(</span>Permanent Plateau<span class="dot-accent">)</span></span>
+            <p>A null state where all sub-topias have lost their coherent, collective, cultural identity and localised lock-downs prevent the creation of new sub-topias, leading to civilisational stagnation by default.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-cell wf-br">
+        <div class="wf-content">
+          <div class="flow-tl"></div>
+          <div class="text-content">
+            <h4>Mono-Cultural Takeover</h4>
+            <span class="sub-title"><span class="dot-accent">(</span>Gray Goo<span class="dot-accent">)</span></span>
+            <p>An expansionist culture or an invasive memetic replicator breaks out of one sub-topia and colonises all others, proliferating to the point of extreme cultural homogeneity across the entire civilisation.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-cell wf-center">
+        <div class="wf-content">
+          <div class="text-content">
+            <h4>Clash of Civilisations</h4>
+            <span class="sub-title"><span class="dot-accent">(</span>Cultural Competition and Conflict<span class="dot-accent">)</span></span>
+            <p>An underdetermined, hybrid condition &ndash; exhibiting proto-characteristics of mono-culture, meta-dystopia and cultural collapse &ndash; where multiple cultures compete for survival, sovereignty and supremacy.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="axis-label x-axis">Membrane Permeability</div>
+    <div class="ticks x-low">Low</div>
+    <div class="ticks x-high">High</div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    document.documentElement.classList.toggle('dark-theme');
+  });
+</script>
+</body>
+</html>
