@@ -62,30 +62,14 @@
     padding: 3rem 1.5rem 5rem;
   }
 
-  .page-header {
-    max-width: 900px;
-    margin: 0 auto 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    font-family: var(--font-sans);
-  }
-  .page-title h1 {
-    font-family: var(--font-serif);
-    font-size: 2.1rem;
-    line-height: 1.15;
-    margin: 0 0 0.5rem 0;
-    letter-spacing: -0.02em;
-  }
-  .page-title p {
-    font-size: 1rem;
-    color: var(--text-secondary);
-    margin: 0;
-    max-width: 640px;
-    transition: color 0.4s ease;
-  }
   .dot-accent { color: var(--accent-color); }
+
+  .top-bar {
+    max-width: 760px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 
   .theme-toggle {
     cursor: pointer;
@@ -94,7 +78,6 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-top: 0.25rem;
     transition: color 0.4s ease;
   }
   .theme-toggle:hover { color: var(--accent-color); }
@@ -104,12 +87,180 @@
   html.dark-theme .moon-icon { display: block; }
 
   /* ========================================== */
+  /* TITLE BOX                                  */
+  /* ========================================== */
+  .title-box {
+    max-width: 760px;
+    margin: 0 auto 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.4s ease;
+  }
+  .title-box .pre-title {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+    transition: color 0.4s ease;
+  }
+  .title-box h1 {
+    font-size: 3rem;
+    line-height: 1.1;
+    margin: 0 0 1rem 0;
+    letter-spacing: -0.02em;
+    font-family: var(--font-serif);
+  }
+  .title-box .subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    line-height: 1.4;
+    margin: 0 0 2rem 0;
+    transition: color 0.4s ease;
+  }
+  .title-box .meta {
+    font-family: var(--font-sans);
+    color: var(--text-secondary);
+    display: flex;
+    gap: 2rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: color 0.4s ease;
+    position: relative;
+  }
+  .meta .author-name { display: inline-flex; align-items: center; }
+  .info-wrapper {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 0.5rem;
+    cursor: help;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .info-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 1px solid var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.4s ease, border-color 0.4s ease;
+  }
+  .info-wrapper:hover .info-icon,
+  .info-wrapper.active .info-icon {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+  }
+  .hoverbox {
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    transform: translateY(10px);
+    margin-bottom: 0.75rem;
+    width: 400px;
+    max-width: 80vw;
+    padding: 1rem;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 0.85rem;
+    line-height: 1.4;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s, background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+    pointer-events: none;
+    z-index: 100;
+    font-family: var(--font-sans);
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  .info-wrapper:hover .hoverbox,
+  .info-wrapper.active .hoverbox {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  html.dark-theme .hoverbox { box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+
+  /* ========================================== */
+  /* CONTENT SECTIONS                           */
+  /* ========================================== */
+  .content {
+    width: 100%;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .content h2 {
+    font-family: var(--font-sans);
+    font-size: 1.75rem;
+    margin-top: 3.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+  }
+  .content h2:first-child { margin-top: 0; }
+  .content h3 {
+    font-family: var(--font-sans);
+    font-size: 1.4rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.4s ease;
+  }
+  #abstract h2 { font-size: 1.1rem; }
+  .content p {
+    font-size: 1.3rem;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+  }
+  .abstract-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+  .abstract-list li {
+    position: relative;
+    font-size: 1.3rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    list-style-type: none;
+  }
+  .abstract-list li::before {
+    content: "\2B26";
+    color: var(--accent-color);
+    font-size: 12px;
+    position: absolute;
+    left: 0;
+    top: 8px;
+  }
+  .content a.inline-link {
+    color: var(--accent-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease;
+  }
+  .content a.inline-link:hover { border-color: var(--accent-color); }
+
+  /* ========================================== */
   /* WIREFRAME DIAGRAM                          */
   /* ========================================== */
   .mechanics-diagram-breakout {
     width: 100%;
     max-width: 900px;
-    margin: 3rem auto 0;
+    margin: 5rem auto 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -327,17 +478,16 @@
     .ticks { font-size: 0.8rem; }
     .wf-center .wf-content { padding: 1rem; }
 
-    .page-title h1 { font-size: 1.6rem; }
+    .title-box h1 { font-size: 2.2rem; }
+    .title-box .subtitle { font-size: 1.1rem; }
+    .content p, .abstract-list li { font-size: 1.15rem; }
+    .hoverbox { width: 280px; right: -10px; left: auto; }
   }
 </style>
 </head>
 <body>
 
-<div class="page-header">
-  <div class="page-title">
-    <h1>The Mechanics of Meta-Utopia<span class="dot-accent">?</span></h1>
-    <p>A typology of four possible post-AGI cultural attractor states, mapped across two civilisation-design variables&mdash;cultural integrity and membrane permeability.</p>
-  </div>
+<div class="top-bar">
   <div class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"></circle>
@@ -354,6 +504,82 @@
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
   </div>
+</div>
+
+<div class="title-box">
+  <div class="pre-title"><span class="dot-accent">&lt;</span> New Mechanisms<span class="dot-accent">:</span> An Introduction to Coordination (Studies) for the 21st Century <span class="dot-accent">&gt;</span></div>
+
+  <h1>The Mechanics of Meta-Utopia<span class="dot-accent">?</span> Civilisation Design for Desirable Multi-Cultural Equilibria</h1>
+  <div class="subtitle">Revisiting the libertarian political philosophy of <em>Anarchy, State and Utopia</em> in light of post-AGI cultural dynamics, defensive accelerationism and pluralistic alignment</div>
+  <div class="meta">
+    <span class="author-name">Max Ramsahoye
+      <span class="info-wrapper">
+        <span class="info-icon">i</span>
+        <span class="hoverbox">Contribution: The subsection <em>The Symmetry Problem: Monocultural Takeover vs Meta-Dystopian Enclosure</em> was authored by Aaron Aggarwal.</span>
+      </span>
+    </span>
+    <span>2026</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <section id="abstract">
+    <h2>Abstract</h2>
+    <p>This macrostrategy research article critically revisits Nozick&rsquo;s libertarian vision of <em>meta-utopia</em>, in light of the novel capabilities and risks posed by <em>transformative AGI</em>. Consilient with the <em>pluralistic alignment</em> of AI, at the governance level meta-utopia proposes <em>civilisation alignment</em> to an ecosystem of multiple sovereign cultures rather than to a single conception of the perfect world-society.</p>
+
+    <p>Drawing on Hanson's framework of <em>Utopia's Garden, Wall, and World</em>, we construct a matrix mapping how the interaction of two <em>civilisation design</em> variables &ndash; <em>cultural integrity</em> (the intra-cultural self-reproduction of sub-utopias) and <em>membrane permeability</em> (the inter-cultural self-protection of sub-utopias) &ndash; generates four possible trajectories for <em>post-AGI cultural dynamics</em>. This set of scenarios situates meta-utopia as a desired multi-cultural equilibrium threatened by three <em>cultural existential risks</em><span class="dot-accent">:</span></p>
+
+    <ul class="abstract-list">
+      <li><strong>Meta-Utopian Uplift (Epistemic Equilibria)</strong><span class="dot-accent">:</span> the transition to a semi-compartmentalised world-system with boundaries open enough for multi-culturalism, freedom of movement and moral progress, but sufficiently protected to prevent hostile cultural takeover.</li>
+      <li><strong>Mono-Cultural Takeover (Gray Goo)</strong><span class="dot-accent">:</span> an expansionist culture or an invasive memetic replicator breaks out of one sub-topia and colonises all others, proliferating to the point of extreme cultural homogeneity across the entire civilisation.</li>
+      <li><strong>Meta-Dystopian Enclosure (Localized lock-ins)</strong><span class="dot-accent">:</span> a defense-dominant, maximally decentralised world-system where every sub-topia is a completely closed system with memetic transmission and physical migration rendered functionally impossible.</li>
+      <li><strong>Cultural Collapse (Permanent Plateau)</strong><span class="dot-accent">:</span> A null state where all sub-topias have lost their coherent, collective, cultural identity and localised lock-downs prevent the creation of new sub-topias, leading to civilisational stagnation by default.</li>
+    </ul>
+
+    <p>Based on this typology, we propose (1) high-level principles for the (AI) governance of <em>cultural evolution</em> (2) delineate <em>civilisation design</em> criteria for a <em>viable world-system</em> and (3) endorse a candidate project for a meta-utopian political institution<span class="dot-accent">:</span> <em>The Internet Government</em>, a virtual form of <em>moral parliament</em> with AI cultural representatives.</p>
+  </section>
+
+  <section id="intro">
+    <h2>0<span class="dot-accent">.</span> Introduction<span class="dot-accent">:</span> The Utopian Turn</h2>
+    <p>In recent years, Effective Altruism (EA) has undergone a <em>&lsquo;utopian turn&rsquo;</em> with thought leaders broadening their horizons <em><a href="https://www.forethought.org/research/beyond-existential-risk" class="inline-link" target="_blank">beyond existential risk</a></em> to <em>existential flourishing</em>, from the end of the world to the beginning of <em>better futures</em>. Whilst a discourse on dystopia and utopia has always been present within the wider <em>futurist</em> culture surrounding EA, this discourse is now coming to the forefront in the light of the transformative potential of AGI.</p>
+    <p>Principally, the <em>next-generation macrostrategy</em> institute <em>Forethought</em>, directed by MacAskill (co-founder of EA), have initiated a research agenda for navigating &lsquo;the transition to a <em>post-AGI society</em>&rsquo; oriented around the novel frame of <em><a href="https://www.forethought.org/research/viatopia" class="inline-link" target="_blank">Viatopia</a></em>. A major desideratum for <em>Viatopia</em> is that it constitutes &lsquo;a state of society&hellip; where many different moral points of view can flourish&rsquo;. Here, MacAskill&rsquo;s <em>Viatopia</em> can be genealogically situated as a higher-level <em>conceptual engineering</em> incorporating Nozick&rsquo;s <em><a href="https://iep.utm.edu/noz-poli/#:~:text=Instead%2C%20he%20turns,of%20cultural%20relativism." class="inline-link" target="_blank">Meta-Utopia</a></em><span class="dot-accent">:</span> the ideal world-society according to libertarian political philosophy which proposes that &lsquo;utopia will consist of utopias, of many different and divergent communities&rsquo;.</p>
+    <p>Based on a review of the literature within the <em>PARA-academic sphere</em> &ndash; the Progress (studies), AI alignment, Rationalist and Effective Altruist research communities &ndash; <em>meta-utopia</em>, as originally envisioned by Nozick, has arguably become the closest to a consensus view on what form a desirable <em>post-AGI society</em> should take and what a positive AI future would look like. Major materials representative of this consensus include<span class="dot-accent">:</span></p>
+    <ul class="abstract-list">
+      <li>Alexander&rsquo;s <a href="https://slatestarcodex.com/2014/06/07/archipelago-and-atomic-communitarianism/" class="inline-link" target="_blank"><em>Archipelago &amp; Atomic Communitarianism</em></a> (2014)</li>
+      <li>Duettmann&rsquo;s <a href="https://www.lesswrong.com/s/9SJM9cdgapDybPksi" class="inline-link" target="_blank"><em>Gaming the Future<span class="dot-accent">:</span> Technologies for Intelligent Voluntary Cooperation</em></a> (2022)</li>
+      <li>Tang&rsquo;s <a href="https://www.plurality.institute/blog-posts/book-launch-plurality-the-future-of-collaborative-technology-and-democracy-by-e-glen-weyl-audrey-tang-and-the-plurality-community" class="inline-link" target="_blank"><em>Plurality<span class="dot-accent">:</span> The Future of Collaborative Technology and Democracy</em></a> (2024).</li>
+    </ul>
+    <p>Despite this there has been minimal research to critically and systematically examine the <em>mechanics of meta-utopia</em><span class="dot-accent">:</span> how a future post-AGI world-system, as a sociotechnical architecture, functions to mediate the interaction between multiple cultures (epistemologies, ontologies, axiologies) and translate the <em><a href="https://www.lesswrong.com/w/complexity-of-value" class="inline-link" target="_blank">complexity of values</a></em> into a dynamic, <em><a href="https://plato.stanford.edu/entries/rawls/#StaOveCon" class="inline-link" target="_blank">overlapping consensus</a></em>. In other words, how (post-)humanity can sustain a <em>progressive form of pluralism</em> at a civilisational-scale, over long-term time horizons (ge geopolitically and spatio-temporally).</p>
+    <p>As we see it, this is the ultimate project of steering towards <em>desirable civilisational equilibria</em> &ndash; and as such, it will inevitably be beyond the scope of this material to provide a sufficient answer. Nonetheless, we aim to formulate the primary constraints, criteria and catastrophes for such a world-system and in doing so formalise an ambitious paradigm for future <em><a href="https://civilizationemerging.com/category/civilization-design/" class="inline-link" target="_blank">civilisation design</a></em> and <em><a href="https://gradual-disempowerment.ai/mitigating-the-risk" class="inline-link" target="_blank">civilisation alignment</a></em> research. The most useful starting point for our purposes is Hanson&rsquo;s short essay <a href="https://www.overcomingbias.com/p/utopias-garden-world-and-wallhtml" class="inline-link" target="_blank"><em>Utopia&rsquo;s Garden, World, and Wall</em></a> (2020), which we turn to next.</p>
+  </section>
+
+  <section id="mechanics">
+    <h2>1<span class="dot-accent">.</span> The Mechanics of Meta-Utopia</h2>
+    <p><a href="https://www.overcomingbias.com/p/utopias-garden-world-and-wallhtml" class="inline-link" target="_blank"><em>Utopia&rsquo;s Garden, World, and Wall</em></a> provides a foundational framework for meta-utopian civilisation design. According to Hanson, &lsquo;utopias have three key issue areas... &ldquo;garden&rdquo;, &ldquo;world&rdquo;, and &ldquo;wall&rdquo;<span class="dot-accent">:</span></p>
+    <p>To translate Hanson&rsquo;s poetic language into more precise terminology, we consider gardens to be <em>sub-topias</em>, the world to be the <em>&lsquo;meta-utopia&rsquo;</em> as a whole and the &lsquo;walls&rsquo; to be the <em>boundaries</em> between subutopias.</p>
+
+    <h3>Sub-topias<span class="dot-accent">:</span> Cultural Integrity</h3>
+    <p>In relation to <em>sub-topias</em> the relevant attribute is their internal <em>cultural integrity</em><span class="dot-accent">:</span> that is, the <em><a href="https://forum.effectivealtruism.org/topics/cultural-persistence" class="inline-link" target="_blank">persistence</a></em> of their culture or the persistence of their collective cultural identity across time, particularly from inter-topian immigration (converting new members from outside) and inter-generational transmission (creating new members from inside).</p>
+    <p>High integrity allows a community to maintain a distinct way of life, while low integrity leads to value dilution and drift. Integrity is a measure of how well the sub-topia maintains cultural continuity and resists cultural change; the strength of its memetic immune system.</p>
+    <ul class="abstract-list">
+      <li><strong>At High Integrity<span class="dot-accent">:</span></strong> the culture possesses a clear set of values, a shared meaning, and effective methods of socialisation for passing those values to the next generation. New members entering this culture, are assimilated into it and it retains a consistent identity over long periods.</li>
+      <li><strong>At Low Integrity<span class="dot-accent">:</span></strong> the culture has conflicting sets of values and it is easily influenced by outside influences. Over time, it loses its distinctiveness and drifts into a generic state because it lacks the mechanisms to maintain its own content.</li>
+    </ul>
+
+    <h3>Boundaries<span class="dot-accent">:</span> Membrane Permeability</h3>
+    <p>In relation to <em>boundaries</em> between <em>sub-topias</em>, the relevant attribute is their <em>permeability</em><span class="dot-accent">:</span> the degree to which they are open or closed to novel information from digital communication or physical migration, determined by their border control and migration policy.</p>
+    <p>High permeability allows for voluntary movement and freedom of association, while low permeability indicates high exit/entry costs or even complete lock-in/lock-out. Permeability is a measure of how easy it is for citizens to transition to another community or a meme to spread across sub-topias.</p>
+    <ul class="abstract-list">
+      <li><strong>At High Permeability<span class="dot-accent">:</span></strong> the sub-topias borders &ndash; physical, legal, digital &ndash; are minimal. People can leave and join different cultures relatively easily without enduring an extensive migration process and can communicate freely with anyone in any other culture. This creates a liquid civilization where people and ideas flow to wherever they would like to.</li>
+      <li><strong>At Low Permeability<span class="dot-accent">:</span></strong> the sub-topias borders are extremely strict. Once you are in, you are trapped (locked-in); once you are out, you are excluded (locked-out). Intranets, content filters and protected online spaces create insular zones online. This creates a rigid and fragmented civilization where groups are physically and memetically isolated from one another and motion is impossible.</li>
+    </ul>
+
+    <h3>Four Futures<span class="dot-accent">:</span> A Typology of Post-AGI Cultural Attractor States</h3>
+    <p>Based on maximalist and minimalist levels of these two variables, we can construct a typology of four possible future trajectories for post-AGI cultural dynamics, including a desired multi-cultural equilibrium threatened by three <em>cultural existential risks</em><span class="dot-accent">:</span> meta-utopian uplift, meta-dystopian enclosure, mono-cultural takeover and cultural collapse.</p>
+    <p>The diagram below charts states and transitions in <em>the possibility space of civilisation design</em>. A civilisation &ndash; existing, historical, future or speculative &ndash; can be represented here as a point, with its coordinates dynamically shifting over time, corresponding to its overall degree of cultural integrity and membrane permeability.</p>
+  </section>
+
 </div>
 
 <div class="mechanics-diagram-breakout">
@@ -432,6 +658,18 @@
 <script>
   document.getElementById('themeToggle').addEventListener('click', () => {
     document.documentElement.classList.toggle('dark-theme');
+  });
+
+  document.querySelectorAll('.info-wrapper').forEach(function(wrapper) {
+    wrapper.addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.classList.toggle('active');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.info-wrapper.active').forEach(function(w) {
+      w.classList.remove('active');
+    });
   });
 </script>
 </body>
